@@ -123,7 +123,7 @@ document.getElementById('contact-form')?.addEventListener('htmx:afterRequest', f
         const responseDiv = document.getElementById('form-response');
         if (responseDiv && !responseDiv.innerHTML.includes('Thank you')) {
             responseDiv.innerHTML = `
-                <div class="p-4 bg-white dark:bg-black border border-black dark:border-white  text-black dark:text-white">
+                <div class="p-4 metallic-card border border-black dark:border-white text-black dark:text-white">
                     <p class="font-bold">Thank you for your message!</p>
                     <p class="text-sm mt-1 font-medium">I'll get back to you as soon as possible.</p>
                 </div>
@@ -137,12 +137,12 @@ document.getElementById('contact-form')?.addEventListener('htmx:afterRequest', f
 document.getElementById('contact-form')?.addEventListener('submit', function(e) {
     e.preventDefault();
     const responseDiv = document.getElementById('form-response');
-    responseDiv.innerHTML = `
-        <div class="p-4 bg-white dark:bg-black border border-black dark:border-white  text-black dark:text-white">
-            <p class="font-bold">Thank you for your message!</p>
-            <p class="text-sm mt-1 font-medium">I'll get back to you as soon as possible.</p>
-        </div>
-    `;
+            responseDiv.innerHTML = `
+                <div class="p-4 metallic-card border border-black dark:border-white text-black dark:text-white">
+                    <p class="font-bold">Thank you for your message!</p>
+                    <p class="text-sm mt-1 font-medium">I'll get back to you as soon as possible.</p>
+                </div>
+            `;
     this.reset();
 });
 </script>

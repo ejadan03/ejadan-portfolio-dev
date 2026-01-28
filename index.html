@@ -1,160 +1,176 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Erfan Jadan — Senior Consultant in Credit Risk</title>
     <meta name="description" content="Quant-driven credit risk consultant specializing in IFRS 9 and IRB models">
-    
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        black: '#000000',
+                        white: '#ffffff',
+                    }
+                }
+            }
+        }
+    </script>
+
     <!-- HTMX -->
     <script src="https://unpkg.com/htmx.org@1.9.10"></script>
     <script>
         // Ensure HTMX is ready before processing
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             if (typeof htmx !== 'undefined') {
                 // Process the entire document
                 htmx.process(document.body);
             }
         });
     </script>
-    
+
     <!-- Google Fonts - Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
     <!-- Custom Styles -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
         }
-        
+
         /* Metallic/Glossy Effects - Pure Black & White */
         .metallic {
             background: linear-gradient(135deg, #ffffff 0%, #ffffff 50%, #ffffff 100%);
-            box-shadow: 
+            box-shadow:
                 0 8px 32px rgba(0, 0, 0, 0.15),
                 inset 0 1px 0 rgba(255, 255, 255, 1),
                 inset 0 -1px 0 rgba(0, 0, 0, 0.2);
             border: 1px solid rgba(0, 0, 0, 0.1);
         }
-        
+
         .dark .metallic {
             background: linear-gradient(135deg, #000000 0%, #000000 50%, #000000 100%);
-            box-shadow: 
+            box-shadow:
                 0 8px 32px rgba(0, 0, 0, 0.8),
                 inset 0 1px 0 rgba(255, 255, 255, 0.15),
                 inset 0 -1px 0 rgba(0, 0, 0, 1);
             border: 1px solid rgba(255, 255, 255, 0.15);
         }
-        
+
         .metallic-card {
             background: linear-gradient(135deg, #ffffff 0%, #ffffff 50%, #ffffff 100%);
-            box-shadow: 
+            box-shadow:
                 0 20px 60px rgba(0, 0, 0, 0.15),
                 inset 0 1px 0 rgba(255, 255, 255, 1),
                 inset 0 -1px 0 rgba(0, 0, 0, 0.2);
             border: 1px solid rgba(0, 0, 0, 0.1);
         }
-        
+
         .dark .metallic-card {
             background: linear-gradient(135deg, #000000 0%, #000000 50%, #000000 100%);
-            box-shadow: 
+            box-shadow:
                 0 20px 60px rgba(0, 0, 0, 0.9),
                 inset 0 1px 0 rgba(255, 255, 255, 0.15),
                 inset 0 -1px 0 rgba(0, 0, 0, 1);
             border: 1px solid rgba(255, 255, 255, 0.15);
         }
-        
+
         .metallic-nav {
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.85) 100%);
             backdrop-filter: blur(20px);
-            box-shadow: 
+            box-shadow:
                 0 4px 20px rgba(0, 0, 0, 0.15),
                 inset 0 1px 0 rgba(255, 255, 255, 0.9);
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         }
-        
+
         .dark .metallic-nav {
             background: linear-gradient(180deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%);
-            box-shadow: 
+            box-shadow:
                 0 4px 20px rgba(0, 0, 0, 0.8),
                 inset 0 1px 0 rgba(255, 255, 255, 0.15);
             border-bottom: 1px solid rgba(255, 255, 255, 0.15);
         }
-        
+
         /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 12px;
         }
-        
+
         ::-webkit-scrollbar-track {
             background: #ffffff;
         }
-        
+
         .dark ::-webkit-scrollbar-track {
             background: #000000;
         }
-        
+
         ::-webkit-scrollbar-thumb {
             background: linear-gradient(180deg, #000000 0%, #000000 100%);
         }
-        
+
         .dark ::-webkit-scrollbar-thumb {
             background: linear-gradient(180deg, #ffffff 0%, #ffffff 100%);
         }
-        
+
         ::-webkit-scrollbar-thumb:hover {
             background: #000000;
         }
-        
+
         .dark ::-webkit-scrollbar-thumb:hover {
             background: #ffffff;
         }
-        
+
         /* Smooth transitions */
         * {
             transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter;
             transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
             transition-duration: 300ms;
         }
-        
+
         /* Animation classes */
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
+
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
         }
-        
+
         .slide-up {
             animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
+
         @keyframes slideUp {
             from {
                 opacity: 0;
                 transform: translateY(40px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
+
         /* Glossy button effect */
         .glossy-btn {
             position: relative;
             overflow: hidden;
         }
-        
+
         .glossy-btn::before {
             content: '';
             position: absolute;
@@ -165,55 +181,62 @@
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
             transition: left 0.5s;
         }
-        
+
         .glossy-btn:hover::before {
             left: 100%;
         }
-        
+
         /* Shimmer effect */
         @keyframes shimmer {
             0% {
                 background-position: -1000px 0;
             }
+
             100% {
                 background-position: 1000px 0;
             }
         }
-        
+
         .shimmer {
             background: linear-gradient(90deg, #ffffff 0%, #ffffff 50%, #ffffff 100%);
             background-size: 1000px 100%;
             animation: shimmer 3s infinite;
         }
-        
+
         .dark .shimmer {
             background: linear-gradient(90deg, #000000 0%, #000000 50%, #000000 100%);
             background-size: 1000px 100%;
         }
-        
+
         /* Pulse animation */
         @keyframes pulse-glow {
-            0%, 100% {
+
+            0%,
+            100% {
                 box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
             }
+
             50% {
                 box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
             }
         }
-        
+
         .dark .pulse-glow {
             animation: pulse-glow-dark 3s ease-in-out infinite;
         }
-        
+
         @keyframes pulse-glow-dark {
-            0%, 100% {
+
+            0%,
+            100% {
                 box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
             }
+
             50% {
                 box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
             }
         }
-        
+
         /* DNA Background Animation */
         .dna-background {
             position: fixed;
@@ -226,36 +249,36 @@
             pointer-events: none;
             opacity: 0.1;
         }
-        
+
         .dark .dna-background {
             opacity: 0.15;
         }
-        
+
         .dna-strand {
             position: absolute;
             width: 3px;
             height: 100%;
-            background: linear-gradient(to bottom, 
-                transparent 0%, 
-                currentColor 8%, 
-                currentColor 12%, 
-                transparent 16%,
-                transparent 18%,
-                currentColor 20%,
-                currentColor 24%,
-                transparent 28%,
-                transparent 72%,
-                currentColor 76%,
-                currentColor 80%,
-                transparent 84%,
-                transparent 86%,
-                currentColor 88%,
-                currentColor 92%,
-                transparent 100%);
+            background: linear-gradient(to bottom,
+                    transparent 0%,
+                    currentColor 8%,
+                    currentColor 12%,
+                    transparent 16%,
+                    transparent 18%,
+                    currentColor 20%,
+                    currentColor 24%,
+                    transparent 28%,
+                    transparent 72%,
+                    currentColor 76%,
+                    currentColor 80%,
+                    transparent 84%,
+                    transparent 86%,
+                    currentColor 88%,
+                    currentColor 92%,
+                    transparent 100%);
             animation: dnaMove 25s linear infinite;
             box-shadow: 0 0 4px currentColor;
         }
-        
+
         .dna-strand::before,
         .dna-strand::after {
             content: '';
@@ -269,84 +292,84 @@
             animation: dnaPulse 3s ease-in-out infinite;
             box-shadow: 0 0 8px currentColor;
         }
-        
+
         .dna-strand::before {
             top: 12%;
             animation-delay: 0s;
         }
-        
+
         .dna-strand::after {
             top: 88%;
             animation-delay: 1.5s;
         }
-        
+
         .dna-strand:nth-child(1) {
             left: 10%;
             color: #000000;
             animation-duration: 25s;
             animation-delay: 0s;
         }
-        
+
         .dna-strand:nth-child(2) {
             left: 20%;
             color: #000000;
             animation-duration: 22s;
             animation-delay: -2s;
         }
-        
+
         .dna-strand:nth-child(3) {
             left: 30%;
             color: #000000;
             animation-duration: 28s;
             animation-delay: -4s;
         }
-        
+
         .dna-strand:nth-child(4) {
             left: 40%;
             color: #000000;
             animation-duration: 24s;
             animation-delay: -1s;
         }
-        
+
         .dna-strand:nth-child(5) {
             left: 50%;
             color: #000000;
             animation-duration: 26s;
             animation-delay: -3s;
         }
-        
+
         .dna-strand:nth-child(6) {
             left: 60%;
             color: #000000;
             animation-duration: 23s;
             animation-delay: -5s;
         }
-        
+
         .dna-strand:nth-child(7) {
             left: 70%;
             color: #000000;
             animation-duration: 27s;
             animation-delay: -2s;
         }
-        
+
         .dna-strand:nth-child(8) {
             left: 80%;
             color: #000000;
             animation-duration: 25s;
             animation-delay: -4s;
         }
-        
+
         .dna-strand:nth-child(9) {
             left: 90%;
             color: #000000;
             animation-duration: 24s;
             animation-delay: -1s;
         }
-        
+
         .dark .dna-strand {
             color: #ffffff;
         }
-        
+
         .dark .dna-strand:nth-child(1),
         .dark .dna-strand:nth-child(2),
         .dark .dna-strand:nth-child(3),
@@ -358,133 +381,147 @@
         .dark .dna-strand:nth-child(9) {
             color: #ffffff;
         }
-        
+
         /* DNA connecting lines */
         .dna-connection {
             position: absolute;
             width: 2px;
             height: 100%;
             background: linear-gradient(to bottom,
-                transparent 0%,
-                currentColor 8%,
-                currentColor 12%,
-                transparent 16%,
-                transparent 18%,
-                currentColor 20%,
-                currentColor 24%,
-                transparent 28%,
-                transparent 72%,
-                currentColor 76%,
-                currentColor 80%,
-                transparent 84%,
-                transparent 86%,
-                currentColor 88%,
-                currentColor 92%,
-                transparent 100%);
+                    transparent 0%,
+                    currentColor 8%,
+                    currentColor 12%,
+                    transparent 16%,
+                    transparent 18%,
+                    currentColor 20%,
+                    currentColor 24%,
+                    transparent 28%,
+                    transparent 72%,
+                    currentColor 76%,
+                    currentColor 80%,
+                    transparent 84%,
+                    transparent 86%,
+                    currentColor 88%,
+                    currentColor 92%,
+                    transparent 100%);
             animation: dnaConnection 4s ease-in-out infinite;
             opacity: 0.4;
             box-shadow: 0 0 3px currentColor;
+            color: #000000;
         }
-        
+
+        .dark .dna-connection {
+            color: #ffffff;
+        }
+
         .dna-connection:nth-child(10) {
             left: 15%;
             animation-delay: 0s;
         }
-        
+
         .dna-connection:nth-child(11) {
             left: 25%;
             animation-delay: 0.5s;
         }
-        
+
         .dna-connection:nth-child(12) {
             left: 35%;
             animation-delay: 1s;
         }
-        
+
         .dna-connection:nth-child(13) {
             left: 45%;
             animation-delay: 1.5s;
         }
-        
+
         .dna-connection:nth-child(14) {
             left: 55%;
             animation-delay: 2s;
         }
-        
+
         .dna-connection:nth-child(15) {
             left: 65%;
             animation-delay: 2.5s;
         }
-        
+
         .dna-connection:nth-child(16) {
             left: 75%;
             animation-delay: 0.3s;
         }
-        
+
         .dna-connection:nth-child(17) {
             left: 85%;
             animation-delay: 0.8s;
         }
-        
-        .dark .dna-connection {
-            color: #ffffff;
-        }
-        
+
         @keyframes dnaMove {
             0% {
                 transform: translateY(-100%) rotate(0deg) translateX(0);
                 opacity: 0;
             }
+
             5% {
                 opacity: 1;
             }
+
             50% {
                 transform: translateY(50vh) rotate(180deg) translateX(5px);
             }
+
             95% {
                 opacity: 1;
             }
+
             100% {
                 transform: translateY(100vh) rotate(360deg) translateX(0);
                 opacity: 0;
             }
         }
-        
+
         @keyframes dnaPulse {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: scale(1);
                 opacity: 0.9;
             }
+
             50% {
                 transform: scale(1.3);
                 opacity: 1;
             }
         }
-        
+
         @keyframes dnaConnection {
-            0%, 100% {
+
+            0%,
+            100% {
                 opacity: 0.4;
                 transform: translateX(0) scaleY(1);
             }
+
             25% {
                 transform: translateX(-8px) scaleY(1.1);
             }
+
             50% {
                 opacity: 0.6;
                 transform: translateX(0) scaleY(1);
             }
+
             75% {
                 transform: translateX(8px) scaleY(1.1);
             }
         }
-        
+
         /* Ensure content is above background */
-        body > *:not(.dna-background) {
+        body>*:not(.dna-background) {
             position: relative;
             z-index: 1;
         }
     </style>
 </head>
+
 <body class="bg-white dark:bg-black text-black dark:text-white antialiased">
     <!-- Animated DNA Background -->
     <div class="dna-background">
@@ -507,175 +544,136 @@
         <div class="dna-connection"></div>
         <div class="dna-connection"></div>
     </div>
-    
+
     <!-- Sticky Navigation -->
-    <nav class="sticky top-0 z-50 metallic-nav border-b border-black dark:border-white relative">
+    <nav class="sticky top-0 z-50 !z-50 metallic-nav border-b border-black dark:border-white relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <!-- Logo/Name -->
                 <div class="flex-shrink-0">
-                    <a href="#" 
-                       hx-get="partials/home.html" 
-                       hx-target="#content" 
-                       hx-swap="innerHTML"
-                       hx-push-url="true"
-                       class="text-xl font-bold text-black dark:text-white hover:text-black dark:hover:text-white transition-all transform hover:scale-105">
+                    <a href="#" hx-get="partials/home.html" hx-target="#content" hx-swap="innerHTML" hx-push-url="true"
+                        class="text-xl font-bold text-black dark:text-white hover:text-black dark:hover:text-white transition-all transform hover:scale-105">
                         Erfan Jadan
                     </a>
                 </div>
-                
-                <!-- Navigation Tabs -->
-                <div class="hidden md:flex space-x-2">
-                    <a href="#" 
-                       hx-get="partials/home.html" 
-                       hx-target="#content" 
-                       hx-swap="innerHTML"
-                       hx-push-url="true"
-                       class="nav-link px-4 py-2  text-sm font-medium text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
-                        Home
-                    </a>
-                    <a href="#" 
-                       hx-get="partials/about.html" 
-                       hx-target="#content" 
-                       hx-swap="innerHTML"
-                       hx-push-url="true"
-                       class="nav-link px-4 py-2  text-sm font-medium text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
-                        About
-                    </a>
-                    <a href="#" 
-                       hx-get="partials/experience.html" 
-                       hx-target="#content" 
-                       hx-swap="innerHTML"
-                       hx-push-url="true"
-                       class="nav-link px-4 py-2  text-sm font-medium text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
-                        Experience
-                    </a>
-                    <a href="#" 
-                       hx-get="partials/projects.html" 
-                       hx-target="#content" 
-                       hx-swap="innerHTML"
-                       hx-push-url="true"
-                       class="nav-link px-4 py-2  text-sm font-medium text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
-                        Projects
-                    </a>
-                    <a href="#" 
-                       hx-get="partials/education.html" 
-                       hx-target="#content" 
-                       hx-swap="innerHTML"
-                       hx-push-url="true"
-                       class="nav-link px-4 py-2  text-sm font-medium text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
-                        Education
-                    </a>
-                    <a href="#" 
-                       hx-get="partials/skills.html" 
-                       hx-target="#content" 
-                       hx-swap="innerHTML"
-                       hx-push-url="true"
-                       class="nav-link px-4 py-2  text-sm font-medium text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
-                        Skills
-                    </a>
-                    <a href="#" 
-                       hx-get="partials/contact.html" 
-                       hx-target="#content" 
-                       hx-swap="innerHTML"
-                       hx-push-url="true"
-                       class="nav-link px-4 py-2  text-sm font-medium text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
-                        Contact
-                    </a>
-                </div>
-                
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden">
-                    <button id="mobile-menu-btn" class="p-2  text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+
+                <!-- Right Side Actions -->
+                <div class="flex items-center">
+                    <!-- Navigation Tabs -->
+                    <div class="hidden md:flex space-x-2">
+                        <a href="#" hx-get="partials/home.html" hx-target="#content" hx-swap="innerHTML"
+                            hx-push-url="true"
+                            class="nav-link px-4 py-2  text-sm font-medium text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
+                            Home
+                        </a>
+                        <a href="#" hx-get="partials/about.html" hx-target="#content" hx-swap="innerHTML"
+                            hx-push-url="true"
+                            class="nav-link px-4 py-2  text-sm font-medium text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
+                            About
+                        </a>
+                        <a href="#" hx-get="partials/experience.html" hx-target="#content" hx-swap="innerHTML"
+                            hx-push-url="true"
+                            class="nav-link px-4 py-2  text-sm font-medium text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
+                            Experience
+                        </a>
+                        <a href="#" hx-get="partials/projects.html" hx-target="#content" hx-swap="innerHTML"
+                            hx-push-url="true"
+                            class="nav-link px-4 py-2  text-sm font-medium text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
+                            Projects
+                        </a>
+                        <a href="#" hx-get="partials/education.html" hx-target="#content" hx-swap="innerHTML"
+                            hx-push-url="true"
+                            class="nav-link px-4 py-2  text-sm font-medium text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
+                            Education
+                        </a>
+                        <a href="#" hx-get="partials/skills.html" hx-target="#content" hx-swap="innerHTML"
+                            hx-push-url="true"
+                            class="nav-link px-4 py-2  text-sm font-medium text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
+                            Skills
+                        </a>
+                        <a href="#" hx-get="partials/contact.html" hx-target="#content" hx-swap="innerHTML"
+                            hx-push-url="true"
+                            class="nav-link px-4 py-2  text-sm font-medium text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
+                            Contact
+                        </a>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <div class="md:hidden">
+                        <button id="mobile-menu-btn"
+                            class="p-2  text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Dark Mode Toggle -->
+                    <button id="dark-mode-toggle"
+                        class="ml-4 p-2  text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all transform hover:scale-110">
+                        <svg id="sun-icon" class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+                            </path>
+                        </svg>
+                        <svg id="moon-icon" class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                            </path>
                         </svg>
                     </button>
                 </div>
-                
-                <!-- Dark Mode Toggle -->
-                <button id="dark-mode-toggle" 
-                        class="ml-4 p-2  text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all transform hover:scale-110">
-                    <svg id="sun-icon" class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                    </svg>
-                    <svg id="moon-icon" class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
-                    </svg>
-                </button>
             </div>
         </div>
-        
+
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden border-t border-black dark:border-white bg-white/85 dark:bg-black/85 backdrop-blur-md">
+        <div id="mobile-menu"
+            class="hidden md:hidden absolute w-full left-0 top-16 border-t border-b border-black dark:border-white bg-white/95 dark:bg-black/95 backdrop-blur-md max-h-[calc(100vh-4rem)] overflow-y-auto shadow-2xl z-40">
             <div class="px-4 py-2 space-y-1">
-                <a href="#" 
-                   hx-get="partials/home.html" 
-                   hx-target="#content" 
-                   hx-swap="innerHTML"
-                   hx-push-url="true"
-                   class="mobile-nav-link block px-4 py-2  text-sm font-medium text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
+                <a href="#" hx-get="partials/home.html" hx-target="#content" hx-swap="innerHTML" hx-push-url="true"
+                    class="mobile-nav-link block px-4 py-2  text-sm font-medium text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
                     Home
                 </a>
-                <a href="#" 
-                   hx-get="partials/about.html" 
-                   hx-target="#content" 
-                   hx-swap="innerHTML"
-                   hx-push-url="true"
-                   class="mobile-nav-link block px-4 py-2  text-sm font-medium text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
+                <a href="#" hx-get="partials/about.html" hx-target="#content" hx-swap="innerHTML" hx-push-url="true"
+                    class="mobile-nav-link block px-4 py-2  text-sm font-medium text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
                     About
                 </a>
-                <a href="#" 
-                   hx-get="partials/experience.html" 
-                   hx-target="#content" 
-                   hx-swap="innerHTML"
-                   hx-push-url="true"
-                   class="mobile-nav-link block px-4 py-2  text-sm font-medium text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
+                <a href="#" hx-get="partials/experience.html" hx-target="#content" hx-swap="innerHTML"
+                    hx-push-url="true"
+                    class="mobile-nav-link block px-4 py-2  text-sm font-medium text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
                     Experience
                 </a>
-                <a href="#" 
-                   hx-get="partials/projects.html" 
-                   hx-target="#content" 
-                   hx-swap="innerHTML"
-                   hx-push-url="true"
-                   class="mobile-nav-link block px-4 py-2  text-sm font-medium text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
+                <a href="#" hx-get="partials/projects.html" hx-target="#content" hx-swap="innerHTML" hx-push-url="true"
+                    class="mobile-nav-link block px-4 py-2  text-sm font-medium text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
                     Projects
                 </a>
-                <a href="#" 
-                   hx-get="partials/education.html" 
-                   hx-target="#content" 
-                   hx-swap="innerHTML"
-                   hx-push-url="true"
-                   class="mobile-nav-link block px-4 py-2  text-sm font-medium text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
+                <a href="#" hx-get="partials/education.html" hx-target="#content" hx-swap="innerHTML" hx-push-url="true"
+                    class="mobile-nav-link block px-4 py-2  text-sm font-medium text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
                     Education
                 </a>
-                <a href="#" 
-                   hx-get="partials/skills.html" 
-                   hx-target="#content" 
-                   hx-swap="innerHTML"
-                   hx-push-url="true"
-                   class="mobile-nav-link block px-4 py-2  text-sm font-medium text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
+                <a href="#" hx-get="partials/skills.html" hx-target="#content" hx-swap="innerHTML" hx-push-url="true"
+                    class="mobile-nav-link block px-4 py-2  text-sm font-medium text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
                     Skills
                 </a>
-                <a href="#" 
-                   hx-get="partials/contact.html" 
-                   hx-target="#content" 
-                   hx-swap="innerHTML"
-                   hx-push-url="true"
-                   class="mobile-nav-link block px-4 py-2  text-sm font-medium text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
+                <a href="#" hx-get="partials/contact.html" hx-target="#content" hx-swap="innerHTML" hx-push-url="true"
+                    class="mobile-nav-link block px-4 py-2  text-sm font-medium text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
                     Contact
                 </a>
             </div>
         </div>
     </nav>
-    
+
     <!-- Main Content Area -->
     <main id="content" class="min-h-screen relative">
         <!-- Initial content will be loaded here via HTMX -->
     </main>
-    
+
     <!-- Footer -->
-    <footer class="bg-white/85 dark:bg-black/85 backdrop-blur-sm border-t border-black dark:border-white py-8 mt-16 relative">
+    <footer
+        class="bg-white/85 dark:bg-black/85 backdrop-blur-sm border-t border-black dark:border-white py-8 mt-16 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center text-sm text-black dark:text-white">
                 <p>&copy; 2024 Erfan Jadan. All rights reserved.</p>
@@ -683,23 +681,31 @@
             </div>
         </div>
     </footer>
-    
+
     <!-- Scripts -->
     <script src="js/darkmode.js"></script>
     <script src="js/animations.js"></script>
-    
+
     <script>
         // Initialize mobile menu functionality
         function initMobileMenu() {
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
-            
+
             if (mobileMenuBtn && mobileMenu) {
-                mobileMenuBtn.addEventListener('click', function() {
+                // Check if listener already exists
+                if (mobileMenuBtn.dataset.hasListener === 'true') {
+                    return;
+                }
+
+                mobileMenuBtn.addEventListener('click', function () {
                     mobileMenu.classList.toggle('hidden');
                 });
+
+                // Mark as initialized
+                mobileMenuBtn.dataset.hasListener = 'true';
             }
-            
+
             // Close mobile menu when clicking a link
             const mobileLinks = document.querySelectorAll('.mobile-nav-link');
             mobileLinks.forEach(link => {
@@ -710,10 +716,10 @@
                 });
             });
         }
-        
+
         // Initialize on page load
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', function () {
                 initMobileMenu();
                 // Load home section on initial page load
                 if (typeof htmx !== 'undefined') {
@@ -733,16 +739,16 @@
                 });
             }
         }
-        
+
         // Re-initialize mobile menu after HTMX swaps
-        document.body.addEventListener('htmx:afterSwap', function(evt) {
+        document.body.addEventListener('htmx:afterSwap', function (evt) {
             if (evt.detail.target.id === 'content') {
                 // Re-initialize mobile menu
                 initMobileMenu();
-                
+
                 // Add slide-up animation
                 evt.detail.target.classList.add('slide-up');
-                
+
                 // Trigger fade-in animations for elements
                 setTimeout(() => {
                     const fadeElements = evt.detail.target.querySelectorAll('.fade-in');
@@ -754,7 +760,7 @@
                 }, 50);
             }
         });
-        
+
         // Ensure HTMX processes all navigation links
         function processHTMXLinks() {
             if (typeof htmx !== 'undefined') {
@@ -764,38 +770,38 @@
                 });
             }
         }
-        
+
         // Process links on initial load
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', function () {
                 setTimeout(processHTMXLinks, 100);
             });
         } else {
             setTimeout(processHTMXLinks, 100);
         }
-        
+
         // Re-process links after HTMX swaps to ensure navigation always works
-        document.body.addEventListener('htmx:afterSwap', function(evt) {
+        document.body.addEventListener('htmx:afterSwap', function (evt) {
             setTimeout(processHTMXLinks, 50);
         });
-        
+
         // Also handle clicks directly as fallback to ensure navigation always works
-        document.body.addEventListener('click', function(evt) {
+        document.body.addEventListener('click', function (evt) {
             const link = evt.target.closest('a[hx-get]');
             if (link) {
                 // Check if HTMX already handled it
                 if (evt.detail && evt.detail.htmx) {
                     return; // HTMX is handling it
                 }
-                
+
                 if (typeof htmx !== 'undefined') {
                     evt.preventDefault();
                     evt.stopPropagation();
-                    
+
                     const hxGet = link.getAttribute('hx-get');
                     const hxTarget = link.getAttribute('hx-target') || '#content';
                     const hxPushUrl = link.getAttribute('hx-push-url');
-                    
+
                     if (hxGet) {
                         // Use HTMX to load the content
                         htmx.ajax('GET', hxGet, {
@@ -809,4 +815,5 @@
         }, true);
     </script>
 </body>
+
 </html>
