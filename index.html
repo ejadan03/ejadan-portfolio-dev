@@ -55,8 +55,8 @@
                 0 8px 32px rgba(0, 0, 0, 0.15),
                 inset 0 1px 0 rgba(255, 255, 255, 1),
                 inset 0 -1px 0 rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-        }
+                border: 1px solid rgba(0, 0, 0, 0.1);
+            }
 
         .dark .metallic {
             background: linear-gradient(135deg, #000000 0%, #000000 50%, #000000 100%);
@@ -85,8 +85,13 @@
             border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
-        .metallic-nav {
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.85) 100%);
+            .metallic-nav {
+            background: linear-gradient(
+            180deg,
+            rgba(243, 244, 246, 0.85), /* gray-100 */
+            rgba(243, 244, 246, 0.85)
+                );
+        }                
             backdrop-filter: blur(20px);
             box-shadow:
                 0 4px 20px rgba(0, 0, 0, 0.15),
@@ -94,8 +99,13 @@
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         }
 
-        .dark .metallic-nav {
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%);
+            .dark .metallic-nav {
+            background: linear-gradient(
+            180deg,
+            rgba(17, 24, 39, 0.85), /* gray-900 */
+            rgba(17, 24, 39, 0.85)
+            );
+        }
             box-shadow:
                 0 4px 20px rgba(0, 0, 0, 0.8),
                 inset 0 1px 0 rgba(255, 255, 255, 0.15);
@@ -108,11 +118,11 @@
         }
 
         ::-webkit-scrollbar-track {
-            background: #ffffff;
+            background: #f3f4f6; /* gray-100 */
         }
 
         .dark ::-webkit-scrollbar-track {
-            background: #000000;
+        background: #111827; /* gray-900 */
         }
 
         ::-webkit-scrollbar-thumb {
@@ -523,7 +533,7 @@
     </style>
 </head>
 
-<body class="bg-white dark:bg-black text-black dark:text-white antialiased">
+<body class="bg-gray-100 dark:bg-gray-900 text-black dark:text-white antialiased">
     <!-- Animated DNA Background -->
     <div class="dna-background">
         <div class="dna-strand"></div>
